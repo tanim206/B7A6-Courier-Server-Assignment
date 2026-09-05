@@ -1,0 +1,53 @@
+model User {
+  id            String       @id @default(uuid())
+  name          String
+  email         String       @unique
+  phone         String       @unique
+  password      String?
+  googleId      String?      @unique
+
+  imageUrl           String     @default("")
+  imagePublicId      String     @default("")
+
+  authProvider  AuthProvider @default(CREDENTIAL)
+  role          Role         @default(CUSTOMER)
+  status        UserStatus   @default(ACTIVE)
+  emailVerified Boolean      @default(false)
+  lastLoginAt   DateTime?
+
+  // Staff belongs to a Hub
+  hubId         String?
+  hub           Hub? @relation("StaffHub",fields: [hubId],references: [id])
+
+  // Admin created Hubs
+  createdHubs Hub[] @relation("HubCreatedByAdmin")
+
+  // Customer's applications
+  hubApplications HubApplication[] @relation("ApplicationUser")
+
+  // Admin who reviewed applications
+  reviewedApplications HubApplication[] @relation("ApplicationReviewer")
+
+
+  sentShipments Shipment[] @relation("SenderShipments")
+  createdShipments Shipment[] @relation("CreatedShipments")
+  receivedShipments Shipment[] @relation("ReceivedShipments")
+
+
+
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  deletedAt DateTime?
+
+
+
+
+  @@index([email])
+  @@index([phone])
+  @@index([role])
+  @@index([status])
+  @@index([hubId])
+
+  @@map("users")
+}

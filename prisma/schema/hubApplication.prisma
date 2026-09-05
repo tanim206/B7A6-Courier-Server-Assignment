@@ -1,0 +1,35 @@
+model HubApplication {
+  id String @id @default(uuid())
+
+  userId String
+  user User @relation("ApplicationUser",fields: [userId],references: [id],onDelete: Cascade)
+
+  hubId String
+  hub Hub @relation(fields: [hubId],references: [id],onDelete: Cascade)
+
+  name String
+  email String
+  phone String
+
+  address String?
+  city String
+  district String
+  division String
+
+  additionalFiles Json?
+
+  status HubApplicationStatus @default(PENDING)
+  rejectionReason String?
+
+  reviewedById String?
+  reviewedBy User? @relation("ApplicationReviewer",fields: [reviewedById],references: [id])
+  reviewedAt DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+  @@index([hubId])
+  @@index([status])
+  @@index([reviewedById])
+}

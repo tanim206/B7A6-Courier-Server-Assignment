@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hub Staff Application Update</title>
+  </head>
+
+  <body
+    style="
+      margin: 0;
+      padding: 0;
+      background-color: #f4f6f8;
+      font-family: Arial, Helvetica, sans-serif;
+      color: #1f2937;
+    "
+  >
+    <div style="padding: 40px 20px">
+      <div
+        style="
+          max-width: 620px;
+          margin: 0 auto;
+          background: #ffffff;
+          border-radius: 16px;
+          overflow: hidden;
+          box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+        "
+      >
+        <!-- Header -->
+        <div
+          style="
+            padding: 32px 30px;
+            background: linear-gradient(135deg, #dc2626, #b91c1c);
+            color: #ffffff;
+            text-align: center;
+          "
+        >
+          <div
+            style="
+              width: 64px;
+              height: 64px;
+              margin: 0 auto 16px;
+              background: rgba(255, 255, 255, 0.18);
+              border-radius: 50%;
+              line-height: 64px;
+              font-size: 30px;
+            "
+          >
+            !
+          </div>
+
+          <h1 style="margin: 0; font-size: 26px; font-weight: 700">
+            Application Update
+          </h1>
+
+          <p style="margin: 10px 0 0; font-size: 15px; color: #fee2e2">
+            Update regarding your Hub Staff application
+          </p>
+        </div>
+
+        <!-- Content -->
+        <div style="padding: 32px 30px">
+          <p style="margin: 0 0 18px; font-size: 16px; line-height: 1.7">
+            Dear <strong><%= applicantName %></strong>,
+          </p>
+
+          <p
+            style="
+              margin: 0 0 24px;
+              font-size: 15px;
+              line-height: 1.8;
+              color: #4b5563;
+            "
+          >
+            Thank you for your interest in joining
+            <strong><%= hubName %></strong> as a Hub Staff member. After
+            carefully reviewing your application, we regret to inform you that
+            your application has not been approved at this time.
+          </p>
+
+          <!-- Rejection Notice -->
+          <div
+            style="
+              padding: 22px;
+              margin-bottom: 24px;
+              background: #fef2f2;
+              border: 1px solid #fecaca;
+              border-radius: 12px;
+            "
+          >
+            <h2 style="margin: 0 0 12px; font-size: 18px; color: #991b1b">
+              Reason for Rejection
+            </h2>
+
+            <p
+              style="
+                margin: 0;
+                font-size: 15px;
+                line-height: 1.8;
+                color: #7f1d1d;
+              "
+            >
+              <%= rejectionReason || "No specific reason was provided." %>
+            </p>
+          </div>
+
+          <!-- Hub Information -->
+          <div
+            style="
+              padding: 22px;
+              margin-bottom: 20px;
+              background: #f9fafb;
+              border: 1px solid #e5e7eb;
+              border-radius: 12px;
+            "
+          >
+            <h2 style="margin: 0 0 18px; font-size: 18px; color: #111827">
+              Hub Information
+            </h2>
+
+            <div style="margin-bottom: 12px">
+              <span style="font-size: 13px; color: #6b7280"> Hub Name </span>
+
+              <div
+                style="
+                  margin-top: 4px;
+                  font-size: 15px;
+                  font-weight: 600;
+                  color: #111827;
+                "
+              >
+                <%= hubName %>
+              </div>
+            </div>
+
+            <div style="margin-bottom: 12px">
+              <span style="font-size: 13px; color: #6b7280"> Hub Code </span>
+
+              <div
+                style="
+                  margin-top: 4px;
+                  font-size: 15px;
+                  font-weight: 600;
+                  color: #111827;
+                "
+              >
+                <%= hubCode %>
+              </div>
+            </div>
+
+            <div>
+              <span style="font-size: 13px; color: #6b7280"> Hub Email </span>
+
+              <div
+                style="
+                  margin-top: 4px;
+                  font-size: 15px;
+                  font-weight: 600;
+                  color: #111827;
+                "
+              >
+                <%= hubEmail || "Not available" %>
+              </div>
+            </div>
+          </div>
+
+          <!-- Contact -->
+          <div
+            style="
+              padding: 22px;
+              margin-bottom: 20px;
+              background: #eff6ff;
+              border: 1px solid #bfdbfe;
+              border-radius: 12px;
+            "
+          >
+            <h2 style="margin: 0 0 12px; font-size: 18px; color: #1e3a8a">
+              Need More Information?
+            </h2>
+
+            <p
+              style="
+                margin: 0;
+                font-size: 14px;
+                line-height: 1.7;
+                color: #374151;
+              "
+            >
+              If you believe there has been a mistake or you need additional
+              information about this decision, please contact the Hub
+              Administration.
+            </p>
+
+            <p style="margin: 12px 0 0; font-size: 14px; color: #1d4ed8">
+              Hub Email:
+              <strong><%= hubEmail || "Not available" %></strong>
+            </p>
+
+            <p style="margin: 8px 0 0; font-size: 14px; color: #374151">
+              Admin:
+              <strong><%= adminName %></strong>
+            </p>
+          </div>
+
+          <!-- Application Info -->
+          <div
+            style="
+              padding: 18px;
+              margin-bottom: 24px;
+              background: #fafafa;
+              border: 1px solid #eeeeee;
+              border-radius: 10px;
+            "
+          >
+            <div style="margin-bottom: 10px">
+              <span style="font-size: 12px; color: #6b7280">
+                Application ID
+              </span>
+
+              <div
+                style="
+                  margin-top: 4px;
+                  font-size: 13px;
+                  color: #374151;
+                  word-break: break-all;
+                "
+              >
+                <%= applicationId %>
+              </div>
+            </div>
+
+            <div>
+              <span style="font-size: 12px; color: #6b7280"> Reviewed At </span>
+
+              <div style="margin-top: 4px; font-size: 14px; color: #374151">
+                <%= reviewedAt ? new Date(reviewedAt).toLocaleString() : "N/A"
+                %>
+              </div>
+            </div>
+          </div>
+
+          <p
+            style="margin: 0; font-size: 15px; line-height: 1.8; color: #4b5563"
+          >
+            We appreciate the time and effort you invested in your application.
+            We encourage you to address the mentioned concerns and apply again
+            in the future if the opportunity becomes available.
+          </p>
+
+          <p style="margin: 24px 0 0; font-size: 15px; line-height: 1.7">
+            Best regards,<br />
+            <strong><%= adminName %></strong><br />
+            Hub Administration
+          </p>
+        </div>
+
+        <!-- Footer -->
+        <div
+          style="
+            padding: 22px 30px;
+            background: #f9fafb;
+            border-top: 1px solid #e5e7eb;
+            text-align: center;
+          "
+        >
+          <p
+            style="margin: 0; font-size: 12px; line-height: 1.6; color: #9ca3af"
+          >
+            This is an automated email. Please do not reply directly to this
+            email unless instructed by the Hub Administration.
+          </p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

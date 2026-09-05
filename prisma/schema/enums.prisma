@@ -1,0 +1,69 @@
+enum Role {
+  CUSTOMER
+  STAFF // STAFF APPLY TO BE A ADMIN
+  ADMIN
+  SUPER_ADMIN
+}
+enum UserStatus {
+  ACTIVE
+  BLOCKED
+  DELETED
+}
+
+enum HubApplicationStatus {
+  DRAFT
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum HubStatus {
+  ACTIVE
+  INACTIVE
+}
+enum ShipmentStatus {
+  PENDING
+  PICKUP_SCHEDULED
+  ASSIGNED
+  PICKED_UP
+  AT_ORIGIN_HUB
+  TRANSIT
+  AT_DESTINATION_HUB
+  OUT_FOR_DELIVERY
+  DELIVERED
+  FAILED_DELIVERY
+  CANCELLED
+}
+
+enum AuthProvider {
+  GOOGLE
+  CREDENTIAL
+}
+
+enum PaymentMethod {
+  BKASH
+  CASH
+}
+
+enum ParcelType {
+  DOCUMENT
+  PARCEL
+  FRAGILE
+  LIQUID
+  ELECTRONICS
+}
+
+enum PaymentStatus {
+  PENDING
+  PAID
+  FAILED
+  CANCELLED
+  REFUNDED
+}
+
+// enum VehicleType {
+//   BIKE
+//   CAR
+//   VAN
+//   TRUCK
+// }

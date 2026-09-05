@@ -1,0 +1,64 @@
+model Shipment {
+  id String @id @default(uuid())
+
+  status ShipmentStatus @default(PENDING)
+
+  // Sender = existing customer
+  senderId String
+  sender User @relation("SenderShipments",fields: [senderId],references: [id])
+
+  // Sender snapshot
+  senderName  String
+  senderEmail String
+  senderPhone String
+
+  // Receiver
+  receiverName     String
+  receiverEmail    String
+  receiverPhone    String
+  receiverAddress  String
+  receiverCity     String
+  receiverDistrict String
+  receiverDivision String
+
+  // Parcel
+  parcelName  String
+  weight      Float?
+  description String?
+
+  // Hub
+  originHubId String
+  originHub   Hub @relation("OriginShipments",fields: [originHubId],references: [id])
+
+  destinationHubId String
+  destinationHub   Hub @relation("DestinationShipments", fields: [destinationHubId], references: [id])
+
+  // Staff who created shipment
+  createdById String
+  createdBy   User @relation("CreatedShipments",fields: [createdById], references: [id])
+
+  // Staff who receives parcel at destination
+  // This same staff will complete delivery
+  receivedById String?
+  receivedBy   User? @relation("ReceivedShipments",fields: [receivedById],references: [id])
+
+  receivedAt DateTime?
+  deliveredAt DateTime?
+
+  // Fixed delivery charge
+  deliveryCharge Decimal @db.Decimal(10, 2)
+
+  payment Payment?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([senderId])
+  @@index([originHubId])
+  @@index([destinationHubId])
+  @@index([createdById])
+  @@index([receivedById])
+  @@index([status])
+
+  @@map("shipments")
+}

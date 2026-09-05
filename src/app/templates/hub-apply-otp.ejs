@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Hub Application Verification</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+        background-color: #f4f6f8;
+        color: #333;
+        padding: 40px 20px;
+      }
+
+      .container {
+        max-width: 600px;
+        margin: 0 auto;
+        background-color: #ffffff;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      }
+
+      .header {
+        background-color: #c81d1d;
+        padding: 30px;
+        text-align: center;
+        color: #ffffff;
+      }
+
+      .header h1 {
+        font-size: 26px;
+        margin-bottom: 8px;
+      }
+
+      .header p {
+        font-size: 14px;
+        opacity: 0.9;
+      }
+
+      .content {
+        padding: 35px 30px;
+      }
+
+      .content h2 {
+        font-size: 22px;
+        margin-bottom: 15px;
+        color: #222;
+      }
+
+      .content p {
+        font-size: 15px;
+        line-height: 1.7;
+        color: #555;
+        margin-bottom: 15px;
+      }
+
+      .otp-box {
+        margin: 25px 0;
+        padding: 20px;
+        text-align: center;
+        background-color: #fff5f5;
+        border: 1px dashed #c81d1d;
+        border-radius: 10px;
+      }
+
+      .otp-label {
+        font-size: 13px;
+        color: #777;
+        margin-bottom: 8px;
+      }
+
+      .otp {
+        font-size: 36px;
+        font-weight: bold;
+        letter-spacing: 8px;
+        color: #c81d1d;
+      }
+
+      .expiration {
+        text-align: center;
+        font-size: 13px !important;
+        color: #888 !important;
+      }
+
+      .warning {
+        margin-top: 25px;
+        padding: 15px;
+        background-color: #fff8e1;
+        border-left: 4px solid #f0ad00;
+        border-radius: 5px;
+      }
+
+      .warning p {
+        margin: 0;
+        font-size: 13px;
+        color: #665c3a;
+      }
+
+      .footer {
+        padding: 20px 30px;
+        text-align: center;
+        background-color: #f8f9fa;
+        border-top: 1px solid #eeeeee;
+      }
+
+      .footer p {
+        font-size: 12px;
+        color: #999;
+        line-height: 1.6;
+      }
+
+      @media (max-width: 600px) {
+        body {
+          padding: 20px 10px;
+        }
+
+        .content {
+          padding: 25px 20px;
+        }
+
+        .header {
+          padding: 25px 20px;
+        }
+
+        .header h1 {
+          font-size: 22px;
+        }
+
+        .otp {
+          font-size: 30px;
+          letter-spacing: 6px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <!-- Header -->
+      <div class="header">
+        <h1>Courier & Logistics</h1>
+        <p>Hub Application Verification</p>
+      </div>
+
+      <!-- Content -->
+      <div class="content">
+        <h2>Hello <%= name %>,</h2>
+
+        <p>
+          Thank you for applying to become a hub in our Courier & Logistics
+          Management Platform.
+        </p>
+
+        <p>
+          To continue with your Hub application, please verify your email
+          address using the OTP below.
+        </p>
+
+        <!-- OTP -->
+        <div class="otp-box">
+          <div class="otp-label">Your Verification Code</div>
+
+          <div class="otp"><%= otp %></div>
+        </div>
+
+        <p class="expiration">
+          This OTP will expire in
+          <strong><%= expirationMinutes %> minutes</strong>.
+        </p>
+
+        <!-- Warning -->
+        <div class="warning">
+          <p>
+            <strong>Security Notice:</strong>
+            Never share this OTP with anyone. Our team will never ask you for
+            your verification code.
+          </p>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <div class="footer">
+        <p>
+          This email was sent to
+          <strong><%= email %></strong>
+        </p>
+
+        <p>If you did not apply for a Hub, please ignore this email.</p>
+
+        <p>
+          &copy; <%= new Date().getFullYear() %> Courier & Logistics Management
+          Platform. All rights reserved.
+        </p>
+      </div>
+    </div>
+  </body>
+</html>

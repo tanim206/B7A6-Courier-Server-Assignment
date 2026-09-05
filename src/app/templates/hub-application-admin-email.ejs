@@ -1,0 +1,388 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>New Hub Staff Application</title>
+  </head>
+
+  <body
+    style="
+      margin: 0;
+      padding: 0;
+      background: #f5f7fa;
+      font-family: Arial, Helvetica, sans-serif;
+      color: #1f2937;
+    "
+  >
+    <div style="padding: 40px 15px">
+      <!-- Main Card -->
+      <div
+        style="
+          max-width: 620px;
+          margin: 0 auto;
+          background: #ffffff;
+          border-radius: 18px;
+          overflow: hidden;
+          box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+        "
+      >
+        <!-- Header -->
+        <div
+          style="
+            background: linear-gradient(135deg, #c81d1d, #e63946);
+            padding: 35px 30px;
+            text-align: center;
+          "
+        >
+          <div
+            style="
+              width: 55px;
+              height: 55px;
+              margin: 0 auto 15px;
+              background: rgba(255, 255, 255, 0.18);
+              border-radius: 50%;
+              line-height: 55px;
+              font-size: 25px;
+              color: #ffffff;
+            "
+          >
+            📦
+          </div>
+
+          <h1
+            style="margin: 0; color: #ffffff; font-size: 25px; font-weight: 700"
+          >
+            Courier & Logistics
+          </h1>
+
+          <p style="margin: 8px 0 0; color: #ffe9e9; font-size: 14px">
+            Hub Management System
+          </p>
+        </div>
+
+        <!-- Content -->
+        <div style="padding: 35px 30px">
+          <!-- Greeting -->
+          <p style="margin: 0 0 8px; font-size: 15px; color: #4b5563">
+            Hello <strong><%= adminName %></strong>,
+          </p>
+
+          <h2 style="margin: 0 0 12px; font-size: 24px; color: #111827">
+            New Staff Application
+          </h2>
+
+          <p
+            style="
+              margin: 0 0 28px;
+              font-size: 14px;
+              line-height: 1.7;
+              color: #6b7280;
+            "
+          >
+            A new applicant has successfully verified their email and submitted
+            a staff application for your hub. Please review the application from
+            your admin dashboard.
+          </p>
+
+          <!-- Status -->
+          <div
+            style="
+              background: #fff7ed;
+              border: 1px solid #fed7aa;
+              border-radius: 12px;
+              padding: 18px 20px;
+              margin-bottom: 28px;
+            "
+          >
+            <div
+              style="
+                font-size: 11px;
+                color: #9a3412;
+                text-transform: uppercase;
+                letter-spacing: 0.7px;
+                margin-bottom: 7px;
+              "
+            >
+              Application Status
+            </div>
+
+            <span
+              style="
+                display: inline-block;
+                padding: 6px 13px;
+                background: #fef3c7;
+                color: #92400e;
+                border-radius: 20px;
+                font-size: 12px;
+                font-weight: 700;
+              "
+            >
+              <%= applicationStatus %>
+            </span>
+          </div>
+
+          <!-- Application ID -->
+          <div
+            style="
+              background: #f9fafb;
+              border: 1px solid #e5e7eb;
+              border-radius: 12px;
+              padding: 18px 20px;
+              margin-bottom: 28px;
+            "
+          >
+            <div
+              style="
+                font-size: 11px;
+                color: #9ca3af;
+                text-transform: uppercase;
+                letter-spacing: 0.6px;
+                margin-bottom: 7px;
+              "
+            >
+              Application ID
+            </div>
+
+            <div
+              style="
+                font-size: 13px;
+                color: #374151;
+                font-weight: 600;
+                word-break: break-all;
+              "
+            >
+              <%= applicationId %>
+            </div>
+          </div>
+
+          <!-- Applicant -->
+          <div style="margin-bottom: 30px">
+            <h3 style="margin: 0 0 15px; font-size: 18px; color: #111827">
+              Applicant Information
+            </h3>
+
+            <!-- Name -->
+            <div style="padding: 15px 0; border-bottom: 1px solid #eeeeee">
+              <div
+                style="
+                  font-size: 11px;
+                  color: #9ca3af;
+                  text-transform: uppercase;
+                  margin-bottom: 5px;
+                "
+              >
+                Full Name
+              </div>
+
+              <div style="font-size: 14px; font-weight: 600; color: #1f2937">
+                <%= applicantName %>
+              </div>
+            </div>
+
+            <!-- Email -->
+            <div style="padding: 15px 0; border-bottom: 1px solid #eeeeee">
+              <div
+                style="
+                  font-size: 11px;
+                  color: #9ca3af;
+                  text-transform: uppercase;
+                  margin-bottom: 5px;
+                "
+              >
+                Email
+              </div>
+
+              <div style="font-size: 14px; font-weight: 600; color: #1f2937">
+                <%= applicantEmail %>
+              </div>
+            </div>
+
+            <!-- Phone -->
+            <div style="padding: 15px 0; border-bottom: 1px solid #eeeeee">
+              <div
+                style="
+                  font-size: 11px;
+                  color: #9ca3af;
+                  text-transform: uppercase;
+                  margin-bottom: 5px;
+                "
+              >
+                Phone
+              </div>
+
+              <div style="font-size: 14px; font-weight: 600; color: #1f2937">
+                <%= applicantPhone %>
+              </div>
+            </div>
+
+            <!-- Address -->
+            <div style="padding: 15px 0; border-bottom: 1px solid #eeeeee">
+              <div
+                style="
+                  font-size: 11px;
+                  color: #9ca3af;
+                  text-transform: uppercase;
+                  margin-bottom: 5px;
+                "
+              >
+                Address
+              </div>
+
+              <div style="font-size: 14px; font-weight: 600; color: #1f2937">
+                <%= applicantAddress || "Not provided" %>
+              </div>
+            </div>
+
+            <!-- Location -->
+            <div style="padding: 15px 0">
+              <div
+                style="
+                  font-size: 11px;
+                  color: #9ca3af;
+                  text-transform: uppercase;
+                  margin-bottom: 8px;
+                "
+              >
+                Location
+              </div>
+
+              <div
+                style="
+                  font-size: 14px;
+                  font-weight: 600;
+                  color: #1f2937;
+                  line-height: 1.7;
+                "
+              >
+                <%= applicantCity %>, <%= applicantDistrict %>, <%=
+                applicantDivision %>
+              </div>
+            </div>
+          </div>
+
+          <!-- Hub -->
+          <div style="margin-bottom: 30px">
+            <h3 style="margin: 0 0 15px; font-size: 18px; color: #111827">
+              Hub Information
+            </h3>
+
+            <div
+              style="
+                background: #fff8f8;
+                border: 1px solid #f3d4d4;
+                border-radius: 12px;
+                padding: 20px;
+              "
+            >
+              <div
+                style="
+                  font-size: 11px;
+                  color: #9ca3af;
+                  text-transform: uppercase;
+                  margin-bottom: 7px;
+                "
+              >
+                Hub Code
+              </div>
+
+              <div
+                style="
+                  font-size: 20px;
+                  font-weight: 700;
+                  color: #c81d1d;
+                  margin-bottom: 18px;
+                "
+              >
+                <%= hubCode %>
+              </div>
+
+              <div
+                style="
+                  font-size: 11px;
+                  color: #9ca3af;
+                  text-transform: uppercase;
+                  margin-bottom: 7px;
+                "
+              >
+                Hub Email
+              </div>
+
+              <div style="font-size: 14px; font-weight: 600; color: #374151">
+                <%= hubEmail || "Not provided" %>
+              </div>
+            </div>
+          </div>
+
+          <!-- Applied At -->
+          <div
+            style="
+              padding: 16px 18px;
+              background: #f9fafb;
+              border-radius: 10px;
+              margin-bottom: 25px;
+            "
+          >
+            <span style="font-size: 12px; color: #9ca3af">
+              Application submitted on
+            </span>
+
+            <strong style="font-size: 13px; color: #374151; margin-left: 5px">
+              <%= appliedAt %>
+            </strong>
+          </div>
+
+          <!-- Action -->
+          <div
+            style="
+              background: #fef2f2;
+              border-left: 4px solid #c81d1d;
+              border-radius: 8px;
+              padding: 18px 20px;
+            "
+          >
+            <h3 style="margin: 0 0 7px; font-size: 15px; color: #991b1b">
+              Action Required
+            </h3>
+
+            <p
+              style="
+                margin: 0;
+                font-size: 13px;
+                line-height: 1.7;
+                color: #7f1d1d;
+              "
+            >
+              Please review this application from your admin dashboard and
+              approve or reject the applicant after completing your review.
+            </p>
+          </div>
+        </div>
+
+        <!-- Footer -->
+        <div
+          style="background: #111827; padding: 25px 30px; text-align: center"
+        >
+          <div
+            style="
+              color: #ffffff;
+              font-size: 14px;
+              font-weight: 600;
+              margin-bottom: 7px;
+            "
+          >
+            Courier &amp; Logistics Management Platform
+          </div>
+
+          <div style="color: #9ca3af; font-size: 11px; line-height: 1.6">
+            This is an automated notification. Please do not reply directly to
+            this email.
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+```
