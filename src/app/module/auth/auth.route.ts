@@ -44,7 +44,4 @@ router.get(
   AuthController.getMe,
 );
 
-
-
-
 export const AuthRoutes = router;

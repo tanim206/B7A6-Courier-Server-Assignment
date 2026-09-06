@@ -1,12 +1,12 @@
 {
-  "name": "project-ph-healthcare-system-backend",
+  "name": "courier-system-backend",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "dev": "tsx watch src/server.ts",
-    "build": "tsup",
-    "start": "node dist/src/server.js",
+    "build": "tsup src/server.ts --out-dir dist",
+    "start": "node dist/server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "format:check": "npx @biomejs/biome format ./src",
     "format:fix": "npx @biomejs/biome format --write ./src",
@@ -37,6 +37,7 @@
     "pdfkit": "^0.20.1",
     "pg": "^8.22.0",
     "redis": "^6.2.0",
+    "tsup": "^8.5.1",
     "zod": "^4.4.3"
   },
   "devDependencies": {
