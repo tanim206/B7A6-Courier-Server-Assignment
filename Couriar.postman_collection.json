@@ -1,0 +1,563 @@
+{
+  "info": {
+    "_postman_id": "a5a3e086-8a44-491f-926b-d812ab70611f",
+    "name": "Couriar",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "50939827",
+    "_collection_link": "https://go.postman.co/collection/50939827-a5a3e086-8a44-491f-926b-d812ab70611f?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Register Customer",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Mr Kamal\",\r\n  \"email\": \"mrb2k017268@gmail.com\",\r\n  \"phone\": \"01732315673\",\r\n  \"password\": \"Passw23231!\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/v1/auth/register",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "register"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Verify-email",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"email\": \"mdtanim.dev@gmail.com\",\r\n  \"otp\": \"313203\"\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/v1/auth/verify-email",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "verify-email"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "// {\r\n//     \"email\": \"mdtanim.dev@gmail.com\",\r\n//     \"password\": \"Password123!\"\r\n// }\r\n\r\n//  destination hub staff login\r\n{\r\n    \"email\": \"mdtasnimhossaintanim@gmail.com\",\r\n    \"password\": \"Password123!\"\r\n}\r\n\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/v1/auth/login",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Google Login",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": []
+        },
+        {
+          "name": "Forgot Password",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"mdtanim.dev@gmail.com\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/v1/auth/forgot-password",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "forgot-password"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Reset Password",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"mdtanim.dev@gmail.com\",\r\n    \"newPassword\": \"Tanim@@@123\",\r\n    \"otp\": \"384386\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/v1/auth/reset-password",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "reset-password"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Profile",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"mdtanim.dev@gmail.com\",\r\n    \"password\": \"Tanim@@@123\"\r\n}"
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/v1/auth/me",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "me"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Hub Create By Admin",
+      "item": [
+        {
+          "name": "Create Hub Only Admin",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"hubName\": \"Moulvibazar Hub\",\r\n  \"hubCode\": \"MHB-001\",\r\n//   \"email\": \"moulvibazar@courier.com\",\r\n//   \"phone\": \"01712345678\",\r\n  \"address\": \"Court Road\",\r\n  \"city\": \"Moulvibazar\",\r\n  \"district\": \"Moulvibazar\",\r\n  \"division\": \"Sylhet\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/v1/hub/create-hub",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "hub",
+                "create-hub"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Hub Application",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "phone",
+                  "value": "01646471206",
+                  "type": "text",
+                  "uuid": "f3fba5e3-5815-4259-b5bd-e87820d6c97d"
+                },
+                {
+                  "key": "address",
+                  "value": "Moulvibazar Sadar",
+                  "type": "text",
+                  "uuid": "49188362-b311-4542-ba4c-91e765b6a801"
+                },
+                {
+                  "key": "city",
+                  "value": "Moulvibazar",
+                  "type": "text",
+                  "uuid": "f934b77c-0bb5-4574-9ae8-b45e3122425a"
+                },
+                {
+                  "key": "district",
+                  "value": "Moulvibazar",
+                  "type": "text",
+                  "uuid": "61c35a1c-d3ec-41cd-959d-4fcca6800bb5"
+                },
+                {
+                  "key": "division",
+                  "value": "Sylhet",
+                  "type": "text",
+                  "uuid": "788c7701-55fe-416b-98af-7afda231a415"
+                },
+                {
+                  "key": "additionalFiles",
+                  "type": "file",
+                  "uuid": "4b4c2331-2695-4b3a-b4c1-9e19842ed10b",
+                  "src": "/C:/Users/mdtan/OneDrive/Pictures/my pc.png"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/v1/hub/application-form/cd5e1f76-3c6a-4df6-9882-211081d644ec",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "hub",
+                "application-form",
+                "cd5e1f76-3c6a-4df6-9882-211081d644ec"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Verify Hub Application",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"applicationId\":\"f1a7416d-174d-4b22-9d5a-8c41bd4878b8\",\r\n    \"otp\":\"946378\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/v1/hub/verify-hub-application",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "hub",
+                "verify-hub-application"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Approve or  Reject Hub Application",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"action\": \"APPROVED\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/v1/hub/application/b3d1dc6f-3fd6-4a45-9f36-1a0c8e6b3199/review",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "hub",
+                "application",
+                "b3d1dc6f-3fd6-4a45-9f36-1a0c8e6b3199",
+                "review"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Shipments",
+      "item": [
+        {
+          "name": "Create Shipment",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"senderId\": \"873b13fa-63ad-4872-b9f4-68beaf81d6f1\",\r\n\r\n  \"receiverName\": \"Nahida Akther\",\r\n  \"receiverEmail\": \"nahidaakterjoly2024@gmail.com\",\r\n  \"receiverPhone\": \"01728634455\",\r\n  \"receiverAddress\": \"Uttora, Dhaka\",\r\n  \"receiverCity\": \"Dhaka\",\r\n  \"receiverDistrict\": \"Dhaka\",\r\n  \"receiverDivision\": \"Dhaka\",\r\n\r\n  \"parcelName\": \"Document\",\r\n  \"weight\": 1,\r\n  \"description\": \"Important documents\",\r\n\r\n  \"destinationHubId\": \"e27b3409-6263-476c-b259-d1544594c4ab\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/v1/shipments",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "shipments"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "New Request",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/shipments/08dec7ef-7166-490d-9dd3-3b3f9909102c/deliver",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "shipments",
+                "08dec7ef-7166-490d-9dd3-3b3f9909102c",
+                "deliver"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Destination Hub Satff Receve Shipment",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/shipments/55a0bb75-2a10-4a3e-962e-779e13ed9546/receive",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "shipments",
+                "55a0bb75-2a10-4a3e-962e-779e13ed9546",
+                "receive"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Destination Hub Satff Delivaerd Shipment",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/shipments/55a0bb75-2a10-4a3e-962e-779e13ed9546/deliver",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "shipments",
+                "55a0bb75-2a10-4a3e-962e-779e13ed9546",
+                "deliver"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "User",
+      "item": [
+        {
+          "name": "Profile Photo",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "profileImage",
+                  "type": "file",
+                  "uuid": "40fef49e-10f9-42a6-98b3-e428f59b079c",
+                  "src": "/C:/Users/mdtan/OneDrive/Pictures/WhatsApp Image 2026-05-10 at 12.00.50 AM.jpeg"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/v1/user/profile-image",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "user",
+                "profile-image"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Payment",
+      "item": [
+        {
+          "name": "Get My Payment",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/payment/my-payments",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "payment",
+                "my-payments"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Payment",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/payment/all",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "payment",
+                "all"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
