@@ -106,6 +106,26 @@ const getMe = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const logoutUser = catchAsync(async (req: Request, res: Response) => {
+  const cookieOptions = {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: (process.env.NODE_ENV === "production"
+      ? "none"
+      : "lax") as "none" | "lax",
+  };
+
+  res.clearCookie("accessToken", cookieOptions);
+  res.clearCookie("refreshToken", cookieOptions);
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "User logged out successfully",
+    data: null,
+  });
+});
+
 const refreshToken = catchAsync(async (req: Request, res: Response) => {
   const refreshToken = req.cookies?.refreshToken;
 
@@ -211,6 +231,7 @@ export const AuthController = {
   verifyCustomerEmail,
   loginUser,
   getMe,
+  logoutUser,
   refreshToken,
   googleLogin,
   forgotPassword,
