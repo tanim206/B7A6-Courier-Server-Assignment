@@ -113,3 +113,152 @@ export const getBkashIdToken = async () => {
     throw new AppError(httpStatus.BAD_GATEWAY, error.message);
   }
 };
+
+/* ==========================================
+   TYPES
+========================================== */
+
+export interface ICreateBkashPaymentPayload {
+  amount: string;
+  merchantInvoiceNumber: string;
+  //  BKASH REQUIRES THE EXACT LITERAL "Sale" (CAPITAL S)
+
+  intent: "Sale";
+  callbackURL: string;
+}
+
+export interface IBkashPaymentResponse {
+  bkashURL: string;
+  paymentID: string;
+  merchantInvoiceNumber?: string;
+}
+
+interface IBkashErrorResponse {
+  statusCode?: string;
+  statusMessage?: string;
+}
+
+const getBkashErrorMessage = (
+  result: Partial<IBkashErrorResponse>,
+  fallback: string,
+) => result.statusMessage?.trim() || result.statusCode?.trim() || fallback;
+
+export interface IBkashExecutePaymentResponse {
+  paymentID: string;
+  trxID: string;
+  invoice?: string;
+  amount: string;
+  status: string;
+  transactionStatus: string;
+  merchantInvoiceNumber: string;
+  success: boolean;
+}
+
+const getRequiredHeaders = async () => {
+  const bkashIdToken = await getBkashIdToken();
+
+  if (!bkashIdToken) {
+    throw new AppError(httpStatus.BAD_GATEWAY, "No Bkash Access Token Found!");
+  }
+
+  return {
+    "Content-Type": "application/json",
+    Accept: "application/json",
+    //  BKASH EXPECTS THE RAW ID_TOKEN, NOT A BEARER PREFIXED VALUE
+    Authorization: bkashIdToken,
+    "X-App-Key": config.bkash_app_key,
+  };
+};
+
+/* ==========================================
+   CREATE A TOKENIZED CHECKOUT SESSION
+   Returns the bKash redirect URL the user must visit.
+========================================== */
+
+export const createBkashPayment = async (
+  payload: ICreateBkashPaymentPayload,
+): Promise<IBkashPaymentResponse> => {
+  try {
+    const response = await fetch(
+      `${config.bkash_base_url}/tokenized/checkout/create`,
+      {
+        method: "POST",
+        headers: await getRequiredHeaders(),
+        body: JSON.stringify({
+          mode: "0011",
+          payerType: "01",
+          currency: "BDT",
+          ...payload,
+        }),
+      },
+    );
+
+    const result = (await response.json()) as Partial<IBkashPaymentResponse> &
+      IBkashErrorResponse;
+
+    if (!response.ok || !result.paymentID || !result.bkashURL) {
+      throw new AppError(
+        httpStatus.BAD_GATEWAY,
+        getBkashErrorMessage(
+          result,
+          "Bkash Payment Session Could Not Be Created",
+        ),
+      );
+    }
+
+    return {
+      bkashURL: result.bkashURL,
+      paymentID: result.paymentID,
+    };
+  } catch (error) {
+    if (error instanceof AppError) {
+      throw error;
+    }
+
+    throw new AppError(
+      httpStatus.BAD_GATEWAY,
+      "Bkash Payment Session Could Not Be Created",
+    );
+  }
+};
+
+/* ==========================================
+   VERIFY/EXECUTE A CHECKOUT SESSION
+   Only bKash itself can confirm that money was actually collected.
+========================================== */
+
+export const executeBkashPayment = async (
+  paymentID: string,
+): Promise<IBkashExecutePaymentResponse> => {
+  try {
+    const response = await fetch(
+      `${config.bkash_base_url}/tokenized/checkout/execute`,
+      {
+        method: "POST",
+        headers: await getRequiredHeaders(),
+        body: JSON.stringify({ paymentID }),
+      },
+    );
+
+    const result = (await response.json()) as IBkashExecutePaymentResponse &
+      IBkashErrorResponse;
+
+    if (!response.ok) {
+      throw new AppError(
+        httpStatus.BAD_GATEWAY,
+        getBkashErrorMessage(result, "Bkash Payment Verification Failed"),
+      );
+    }
+
+    return result;
+  } catch (error) {
+    if (error instanceof AppError) {
+      throw error;
+    }
+
+    throw new AppError(
+      httpStatus.BAD_GATEWAY,
+      "Bkash Payment Verification Failed",
+    );
+  }
+};

@@ -4,6 +4,31 @@ import { prisma } from "../../lib/prisma";
 import { RequestUser } from "../../middleware/checkAuth";
 import { AppError } from "../../utils/AppError";
 
+//  DECIMAL -> STRING SO THE FRONTEND NEVER LOSES PRECISION
+
+const serializePayment = <
+  T extends {
+    amount: unknown;
+    shipment?: { deliveryCharge: unknown } | null;
+  },
+>(
+  payment: T,
+) => {
+  return {
+    ...payment,
+    amount: String(payment.amount),
+
+    ...(payment.shipment
+      ? {
+          shipment: {
+            ...payment.shipment,
+            deliveryCharge: String(payment.shipment.deliveryCharge),
+          },
+        }
+      : {}),
+  };
+};
+
 // GET MY PAYMENTS (CUSTOMER)
 
 const getMyPayments = async (user: RequestUser) => {
@@ -84,18 +109,18 @@ const getMyPayments = async (user: RequestUser) => {
     },
   });
 
-  return payments;
+  return payments.map(serializePayment);
 };
 
 // GET ALL PAYMENTS
-// Admin can see all payments
+// Admin / Super Admin can see all payments
 
 const getAllPayments = async (user: RequestUser) => {
-  // CHECK SUPER ADMIN
-  if (user.role !== Role.SUPER_ADMIN) {
+  // CHECK ADMIN/SUPER ADMIN
+  if (user.role !== Role.ADMIN && user.role !== Role.SUPER_ADMIN) {
     throw new AppError(
       httpStatus.FORBIDDEN,
-      "Only Super Admin Can View All Payments",
+      "Only Admin Can View All Payments",
     );
   }
 
@@ -166,13 +191,27 @@ const getAllPayments = async (user: RequestUser) => {
     },
   });
 
-  return payments;
+  return payments.map(serializePayment);
 };
 // GET PAYMENT BY ID
 // Customer = own payment
-// Admin = any payment
+// Admin / Super Admin = any payment
 
 const getPaymentById = async (paymentId: string, user: RequestUser) => {
+  // ONLY CUSTOMER OR ADMIN OR SUPER ADMIN
+  if (
+    user.role !== Role.CUSTOMER &&
+    user.role !== Role.ADMIN &&
+    user.role !== Role.SUPER_ADMIN
+  ) {
+    throw new AppError(
+      httpStatus.FORBIDDEN,
+      "You Are Not Allowed To View Payments",
+    );
+  }
+
+  //  GATEWAY RESPONSE IS HIDDEN FROM CUSTOMERS
+
   const payment = await prisma.payment.findUnique({
     where: {
       id: paymentId,
@@ -186,6 +225,10 @@ const getPaymentById = async (paymentId: string, user: RequestUser) => {
         },
       },
     },
+
+    omit: {
+      gatewayResponse: user.role === Role.CUSTOMER,
+    },
   });
 
   if (!payment) {
@@ -193,24 +236,14 @@ const getPaymentById = async (paymentId: string, user: RequestUser) => {
   }
 
   // CUSTOMER CAN ONLY SEE OWN PAYMENT
-  if (user.role === Role.CUSTOMER) {
-    if (payment.shipment.senderId !== user.userId) {
-      throw new AppError(
-        httpStatus.FORBIDDEN,
-        "You Are Not Allowed To View This Payment",
-      );
-    }
-  }
-
-  // ONLY CUSTOMER OR ADMIN
-  if (user.role !== Role.CUSTOMER && user.role !== Role.ADMIN) {
+  if (user.role === Role.CUSTOMER && payment.shipment.senderId !== user.userId) {
     throw new AppError(
       httpStatus.FORBIDDEN,
-      "You Are Not Allowed To View Payments",
+      "You Are Not Allowed To View This Payment",
     );
   }
 
-  return payment;
+  return serializePayment(payment);
 };
 
 export const PaymentService = {

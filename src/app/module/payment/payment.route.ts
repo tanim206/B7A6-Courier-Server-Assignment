@@ -12,9 +12,13 @@ router.get(
   PaymentController.getMyPayments,
 );
 
-// ADMIN - ALL PAYMENTS
+// ADMIN / SUPER ADMIN - ALL PAYMENTS
 
-router.get("/all", auth(Role.SUPER_ADMIN), PaymentController.getAllPayments);
+router.get(
+  "/all",
+  auth(Role.ADMIN, Role.SUPER_ADMIN),
+  PaymentController.getAllPayments,
+);
 
 // CUSTOMER / ADMIN - PAYMENT BY ID
 

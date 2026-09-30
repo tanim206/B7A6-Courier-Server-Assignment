@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import httpStatus from "http-status";
-import { hubService } from "./hub.service";
+import { hubService, hubLookupService } from "./hub.service";
 import { catchAsync } from "../../utils/catchAsync";
 import { sendResponse } from "../../utils/sendResponse";
 import { HubApplicationStatus } from "../../../generated/prisma/enums";
@@ -87,10 +87,37 @@ const reviewHubApplicationByAdmin = catchAsync(
   },
 );
 
+const getActiveHubs = catchAsync(async (_req: Request, res: Response) => {
+  const result = await hubLookupService.getActiveHubs();
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "Active Hubs Retrieved Successfully",
+    data: result,
+  });
+});
+
+const searchCustomers = catchAsync(async (req: Request, res: Response) => {
+  const result = await hubLookupService.searchCustomers(
+    req.user!,
+    req.query.searchTerm as string | undefined,
+  );
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "Customers Retrieved Successfully",
+    data: result,
+  });
+});
+
 export const hubController = {
   createHubByAdmin,
   updateHubByAdmin,
   applyHubApplication,
   verifyHubApplicationEmail,
   reviewHubApplicationByAdmin,
+  getActiveHubs,
+  searchCustomers,
 };

@@ -10,8 +10,28 @@ export interface ICreateShipmentPayload {
   receiverDivision: string;
 
   parcelName: string;
-  weight?: number;
+  weight: number;
   description?: string;
 
   destinationHubId: string;
+}
+
+export interface IGetHubShipmentsQuery {
+  searchTerm?: string;
+  status?: string;
+}
+
+export interface IDeliveryChargeQuoteQuery {
+  destinationHubId: string;
+  weight: number;
+}
+
+export interface IDeliveryChargeQuote {
+  division: string;
+  weightKg: number;
+  baseCharge: number;
+  freeWeightKg: number;
+  extraKg: number;
+  extraKgCharge: number;
+  totalCharge: number;
 }

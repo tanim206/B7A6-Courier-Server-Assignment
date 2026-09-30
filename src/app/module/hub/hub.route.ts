@@ -6,8 +6,15 @@ import { hubController } from "./hub.controller";
 
 const router = express.Router();
 
+//  ACTIVE HUBS - USED AS THE SHIPMENT DESTINATION SELECTOR
+
+router.get("/active", auth(Role.STAFF, Role.CUSTOMER), hubController.getActiveHubs);
+
+//  STAFF ONLY - CUSTOMER SEARCH FOR THE SHIPMENT SENDER SELECTOR
+
+router.get("/customers/search", auth(Role.STAFF), hubController.searchCustomers);
+
 router.post("/create-hub", auth(Role.ADMIN), hubController.createHubByAdmin);
-router.patch("/:hubId", auth(Role.ADMIN), hubController.updateHubByAdmin);
 
 router.post(
   "/application-form/:hubId",
@@ -32,5 +39,7 @@ router.patch(
   auth(Role.ADMIN),
   hubController.reviewHubApplicationByAdmin,
 );
+
+router.patch("/:hubId", auth(Role.ADMIN), hubController.updateHubByAdmin);
 
 export const HubRoutes = router;

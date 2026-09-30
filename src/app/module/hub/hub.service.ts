@@ -15,6 +15,7 @@ import {
   HubApplicationStatus,
   HubStatus,
   Role,
+  UserStatus,
 } from "../../../generated/prisma/enums";
 import { RequestUser } from "../../middleware/checkAuth";
 import { UploadApiResponse } from "cloudinary";
@@ -550,4 +551,78 @@ export const hubService = {
   applyHubApplication,
   verifyHubApplicationEmail,
   reviewHubApplicationByAdmin,
+};
+
+/* ==========================================
+   LOOKUPS USED BY THE SHIPMENT MODULE
+========================================== */
+
+//  ACTIVE HUBS FOR THE DESTINATION SELECTOR
+
+const getActiveHubs = async () => {
+  return prisma.hub.findMany({
+    where: {
+      status: HubStatus.ACTIVE,
+      deletedAt: null,
+    },
+
+    select: {
+      id: true,
+      hubCode: true,
+      name: true,
+      city: true,
+      district: true,
+      division: true,
+      address: true,
+      phone: true,
+    },
+
+    orderBy: [{ name: "asc" }],
+  });
+};
+
+//  STAFF ONLY - CUSTOMER SEARCH FOR THE SENDER SELECTOR
+
+const searchCustomers = async (user: RequestUser, searchTerm?: string) => {
+  const term = searchTerm?.trim();
+
+  if (user.role !== Role.STAFF) {
+    throw new AppError(
+      httpStatus.FORBIDDEN,
+      "Only Staff Can Search Customers",
+    );
+  }
+
+  return prisma.user.findMany({
+    where: {
+      role: Role.CUSTOMER,
+      status: UserStatus.ACTIVE,
+      deletedAt: null,
+      ...(term
+        ? {
+            OR: [
+              { name: { contains: term, mode: "insensitive" } },
+              { email: { contains: term, mode: "insensitive" } },
+              { phone: { contains: term } },
+            ],
+          }
+        : {}),
+    },
+
+    select: {
+      id: true,
+      name: true,
+      email: true,
+      phone: true,
+    },
+
+    orderBy: [{ name: "asc" }],
+
+    take: 25,
+  });
+};
+
+export const hubLookupService = {
+  getActiveHubs,
+  searchCustomers,
 };

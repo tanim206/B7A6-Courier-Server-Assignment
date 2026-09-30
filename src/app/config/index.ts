@@ -32,6 +32,10 @@ export default {
   bkash_app_secret: process.env.BKASH_APP_SECRET!,
   bkash_callback_url: process.env.BKASH_CALLBACK_URL!,
 
+  //  DELIVERY CHARGE
+  delivery_free_weight_kg: process.env.DELIVERY_FREE_WEIGHT_KG || "1",
+  delivery_extra_kg_charge: process.env.DELIVERY_EXTRA_KG_CHARGE || "40",
+
   super_admin_name: process.env.SUPER_ADMIN_NAME!,
   super_admin_email: process.env.SUPER_ADMIN_EMAIL!,
   super_admin_password: process.env.SUPER_ADMIN_PASSWORD!,
