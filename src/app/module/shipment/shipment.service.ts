@@ -355,8 +355,9 @@ const startBkashSession = async (input: {
   try {
     const bkashResult = await createBkashPayment({
       amount: input.amount,
+      payerReference: input.payerReference,
       merchantInvoiceNumber: input.shipmentId,
-      intent: "Sale",
+      intent: "sale",
       callbackURL: `${config.bkash_callback_url}${BKASH_CALLBACK_PATH}`,
     });
 

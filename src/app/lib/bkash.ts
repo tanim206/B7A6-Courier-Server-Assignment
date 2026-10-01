@@ -121,9 +121,14 @@ export const getBkashIdToken = async () => {
 export interface ICreateBkashPaymentPayload {
   amount: string;
   merchantInvoiceNumber: string;
-  //  BKASH REQUIRES THE EXACT LITERAL "Sale" (CAPITAL S)
+  //  BKASH REQUIRES A PAYER REFERENCE (SENDER PHONE OR EMAIL)
 
-  intent: "Sale";
+  payerReference: string;
+
+  //  THE SANDBOX GATEWAY REJECTS THE CAPITALISED FORM WITH
+  //  2008 "INVALID INTENT" SO THE VALUE IS SENT IN LOWERCASE
+
+  intent: "sale";
   callbackURL: string;
 }
 
