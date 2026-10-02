@@ -24,6 +24,20 @@ const uploadProfileImage = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const updateProfile = catchAsync(async (req: Request, res: Response) => {
+  const { name, phone } = req.body;
+  const userId = req.user?.userId;
+
+  const result = await UserServices.updateProfile({ name, phone }, userId!);
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "Profile updated successfully",
+    data: result,
+  });
+});
+
 const deleteUserByID = catchAsync(async (req, res) => {
   const { userId } = req.params;
 
@@ -38,6 +52,7 @@ const deleteUserByID = catchAsync(async (req, res) => {
 });
 
 export const UserController = {
+  updateProfile,
   uploadProfileImage,
   deleteUserByID,
 };

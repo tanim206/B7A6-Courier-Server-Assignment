@@ -1,5 +1,6 @@
 import type { NextFunction, Request, Response } from "express";
 import httpStatus from "http-status";
+import multer from "multer";
 import { Prisma } from "../../generated/prisma/client";
 import config from "../config";
 import { AppError } from "../utils/AppError";
@@ -54,6 +55,15 @@ export const globalErrorHandler = async (
 		statusCode = httpStatus.FORBIDDEN;
 		errorMessage =
 			"Cloudinary authentication failed. Please check your Cloudinary API credentials.";
+	} else if (err instanceof multer.MulterError) {
+		//  THE UPLOAD MIDDLEWARE REJECTS THE WRONG TYPE OR SIZE
+		//  BEFORE THE CONTROLLER EVER RUNS
+
+		statusCode = httpStatus.BAD_REQUEST;
+		errorMessage =
+			err.code === "LIMIT_FILE_SIZE"
+				? "The Image Must Be 5 MB Or Smaller"
+				: "Only JPG, PNG, WebP Or GIF Images Are Accepted";
 	} else if (err instanceof Error) {
 		errorMessage = err.message;
 	}
