@@ -23,6 +23,7 @@ import type {
   IUpdateUserRolePayload,
   IUpdateUserStatusPayload,
 } from "./admin.interface";
+import { hubService } from "../hub/hub.service";
 
 /* ==========================================
    HELPERS
@@ -885,7 +886,6 @@ const reviewHubApplication = async (
 ) => {
   //  THE EXISTING SERVICE OWNS THE APPROVE/REJECT RULES AND EMAILS
 
-  const { hubService } = await import("../hub/hub.service");
 
   return hubService.reviewHubApplicationByAdmin(applicationId, payload, admin);
 };
